@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,7 +41,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    LoginScreen()
                 }
             }
         }
@@ -75,6 +76,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             value = password,
             onValueChange = { password = it },
             label = { Text("Password")},
+            visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.padding(16.dp))
 
 
