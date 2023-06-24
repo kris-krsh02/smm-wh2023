@@ -13,6 +13,21 @@
         android:theme="@style/Theme.ShareMyMeals"
         tools:targetApi="31">
         <activity
+            android:name=".PointsShare"
+            android:exported="false"
+            android:label="@string/title_activity_points_share"
+            android:theme="@style/Theme.ShareMyMeals" />
+        <activity
+            android:name=".SwipeShare"
+            android:exported="false"
+            android:label="@string/title_activity_swipe_share"
+            android:theme="@style/Theme.ShareMyMeals" />
+        <activity
+            android:name=".TopBar"
+            android:exported="false"
+            android:label="@string/title_activity_top_bar"
+            android:theme="@style/Theme.ShareMyMeals" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
