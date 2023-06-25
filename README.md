@@ -1,1 +1,5 @@
-# smm-wh2023
+# Share My Meals App 
+
+## WaffleHacks2023
+
+
