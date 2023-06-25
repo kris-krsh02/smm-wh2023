@@ -30,6 +30,7 @@ import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
 class LoginActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -39,8 +40,9 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   // LoginScreen()
+
                 }
+
             }
         }
     }
@@ -49,6 +51,7 @@ class LoginActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -78,9 +81,11 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.padding(16.dp))
 
-
         Button(
-            onClick = { navController.navigate(Screens.Home.route) },
+
+            onClick = {
+                navController.navigate(Screens.Home.route)
+            },
             modifier = Modifier.align(Alignment.CenterHorizontally),
 
         ) {
@@ -88,8 +93,11 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
         }
 
 
+
     }
 }
+
+
 
 
 @Preview(showBackground = true)
