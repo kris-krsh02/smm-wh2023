@@ -53,7 +53,7 @@ fun SwipeScreen(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Share Swipes",
-            style = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold),
+            style = TextStyle(fontSize = 30.sp),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 

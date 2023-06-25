@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,13 +20,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
 class LoginActivity : ComponentActivity() {
@@ -41,7 +41,7 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                   // LoginScreen()
                 }
             }
         }
@@ -50,7 +50,7 @@ class LoginActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -58,7 +58,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Welcome!",
-            style = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold),
+            style = TextStyle(fontSize = 30.sp),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -81,7 +81,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(Screens.Home.route) },
             modifier = Modifier.align(Alignment.CenterHorizontally),
 
         ) {
@@ -97,6 +97,6 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 @Composable
 fun LoginPreview() {
     ShareMyMealsTheme {
-        LoginScreen()
+       // LoginScreen()
     }
 }

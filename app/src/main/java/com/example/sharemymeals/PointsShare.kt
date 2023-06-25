@@ -55,7 +55,7 @@ fun PointsScreen(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Share Points",
-            style = TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold),
+            style = TextStyle(fontSize = 30.sp),
             modifier = Modifier.padding(bottom = 16.dp)
         )
 

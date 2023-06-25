@@ -18,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
 class HomeActivity : ComponentActivity() {
@@ -30,7 +32,7 @@ class HomeActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen()
+                   // HomeScreen()
                 }
             }
         }
@@ -44,7 +46,7 @@ var swipeCount = 10
 var pointsCount = 250
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -60,11 +62,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             }
         }
 
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { navController.navigate(Screens.Swipes.route) }) {
             Text(text = "Share Swipes")
         }
 
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { navController.navigate(Screens.Points.route) }) {
             Text(text = "Share Points")
         }
     }
@@ -74,6 +76,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 fun HomePreview(){
     ShareMyMealsTheme {
-        HomeScreen()
+       // HomeScreen()
     }
 }
