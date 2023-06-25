@@ -1,5 +1,6 @@
 package com.example.sharemymeals
 
+import android.content.IntentSender
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.sharemymeals.data.User
 import com.example.sharemymeals.navigation.PageAppBar
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
@@ -51,6 +53,9 @@ class PointsShare : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
+
+    val userSend = remember { loggedUser }
+
     PageAppBar(titleText = "Share Points", navController = navController)
 
     Column(
@@ -64,7 +69,7 @@ fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        var username by remember { mutableStateOf("") }
+        var username by remember {mutableStateOf("") }
         var numPoints by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -82,7 +87,7 @@ fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
 
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { SendPoints(userSend, userData.getUserByUsername(username), numPoints.toInt()) },
             modifier = Modifier.align(Alignment.CenterHorizontally),
 
             ) {
@@ -93,6 +98,14 @@ fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
     }
 }
 
+
+fun SendPoints (userSender: User?, userReceiver: User?, num: Int) {
+    userSender!!.pointsCount = userSender!!.pointsCount - num
+    userReceiver!!.pointsCount = userReceiver!!.pointsCount + num
+
+
+
+}
 
 @Preview(showBackground = true)
 @Composable

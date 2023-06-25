@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -39,17 +40,25 @@ class HomeActivity : ComponentActivity() {
                 }
             }
         }
+
+
+
     }
 
 
 }
-var name = "Jack Smith"
-var username = "smit1000"
-var swipeCount = 10
-var pointsCount = 250
+
+
+
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
+    val user = remember { loggedUser }
+
+    var username = user!!.username
+    var name = user!!.name
+    var swipeCount = user!!.swipeCount
+    var pointsCount = user!!.pointsCount
     HomeAppBar(titleText = "Home", navController = navController)
     Column(
         modifier = Modifier.fillMaxSize(),

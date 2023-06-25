@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -65,6 +66,7 @@ fun PageAppBar(titleText: String, navController: NavController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeAppBar(titleText: String, navController: NavController) {
+    val context = LocalContext.current
     TopAppBar(
         title = { Text(text = titleText )},
         colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -73,7 +75,7 @@ fun HomeAppBar(titleText: String, navController: NavController) {
         ),
 
         actions = {
-            IconButton(onClick = { navController.navigate(Screens.Login.route) }) {
+            IconButton(onClick = { navController.navigate(Screens.Login.route)}) {
                 Icon(Icons.Default.ExitToApp, contentDescription = "Logout", tint = Color.White)
             }
         }

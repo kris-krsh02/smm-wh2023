@@ -11,12 +11,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,8 +29,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.sharemymeals.data.User
 import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
+import kotlinx.coroutines.launch
+import values.UserData
+
+var loggedUser: User? = null
+
 
 class LoginActivity : ComponentActivity() {
 
@@ -47,10 +56,13 @@ class LoginActivity : ComponentActivity() {
         }
     }
 }
+val userData = UserData()
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
+    val snackbarHostState = remember { SnackbarHostState() }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -59,7 +71,7 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
     ) {
 
         Text(
-            text = "Welcome!",
+            text = "Share My Meals!",
             style = TextStyle(fontSize = 30.sp),
             modifier = Modifier.padding(bottom = 16.dp)
         )
@@ -80,17 +92,35 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
             label = { Text("Password")},
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.padding(16.dp))
+        val coroutineScope = rememberCoroutineScope()
+        Column(
+            modifier = Modifier.align(Alignment.CenterHorizontally))
+        {
+            Button(
 
-        Button(
+                onClick = {
+                    val user = userData.getUserByUsername(username)
 
-            onClick = {
-                navController.navigate(Screens.Home.route)
-            },
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+                    if (user != null && user.password == password){
+                        navController.navigate(Screens.Home.route)
+                        loggedUser = user}
+                    else {
+                        val message = "Incorrect credentials. Please try again. "
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message)
+                        }
+                    }
+                },
 
-        ) {
-            Text(text = "Login")
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+
+                ) {
+                Text(text = "Login")
+            }
+                SnackbarHost(snackbarHostState)
+
         }
+
 
 
 
