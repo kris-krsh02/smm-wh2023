@@ -26,6 +26,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.sharemymeals.navigation.PageAppBar
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
 class PointsShare : ComponentActivity() {
@@ -38,7 +41,7 @@ class PointsShare : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PointsScreen()
+                    //PointsScreen()
                 }
             }
         }
@@ -47,7 +50,9 @@ class PointsShare : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PointsScreen(modifier: Modifier = Modifier) {
+fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
+    PageAppBar(titleText = "Share Points", navController = navController)
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -93,7 +98,7 @@ fun PointsScreen(modifier: Modifier = Modifier) {
 @Composable
 fun PointsPreview() {
     ShareMyMealsTheme {
-        PointsScreen()
+        PointsScreen(navController = rememberNavController())
     }
 }
 

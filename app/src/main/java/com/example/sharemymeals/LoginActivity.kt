@@ -21,13 +21,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
@@ -56,6 +54,7 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         Text(
             text = "Welcome!",
             style = TextStyle(fontSize = 30.sp),
@@ -97,6 +96,6 @@ fun LoginScreen(modifier: Modifier = Modifier, navController: NavController) {
 @Composable
 fun LoginPreview() {
     ShareMyMealsTheme {
-       // LoginScreen()
+       //LoginScreen()
     }
 }

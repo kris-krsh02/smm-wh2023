@@ -13,12 +13,16 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.sharemymeals.navigation.HomeAppBar
 import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
 
@@ -47,12 +51,14 @@ var pointsCount = 250
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
+    HomeAppBar(titleText = "Home", navController = navController)
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = name)
+
+        Text(text = name, style = TextStyle(fontSize = 30.sp))
         Text(text = username)
 
         Box() {
