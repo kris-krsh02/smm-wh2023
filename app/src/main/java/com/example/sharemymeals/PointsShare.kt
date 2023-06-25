@@ -12,12 +12,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +34,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.sharemymeals.data.User
 import com.example.sharemymeals.navigation.PageAppBar
+import com.example.sharemymeals.navigation.Screens
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
+import kotlinx.coroutines.launch
 
 class PointsShare : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +60,7 @@ class PointsShare : ComponentActivity() {
 fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
 
     val userSend = remember { loggedUser }
+    val snackbarHostState = remember { SnackbarHostState() }
 
     PageAppBar(titleText = "Share Points", navController = navController)
 
@@ -86,12 +92,36 @@ fun PointsScreen(modifier: Modifier = Modifier, navController: NavController) {
             modifier = Modifier.padding(16.dp))
 
 
-        Button(
-            onClick = { SendPoints(userSend, userData.getUserByUsername(username), numPoints.toInt()) },
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+        val coroutineScope = rememberCoroutineScope()
+        Column(
+            modifier = Modifier.align(Alignment.CenterHorizontally))
+        {
+            Button(
+
+                onClick = {
+                    val user = userData.getUserByUsername(username)
+
+                    if (user != null) {
+                        val message = "Transaction successful!"
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message)
+                        }
+                    }
+                    else {
+                        val message = "Incorrect username. Please try again. "
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message)
+                        }
+                    }
+                },
+
+                modifier = Modifier.align(Alignment.CenterHorizontally)
 
             ) {
-            Text(text = "Send")
+                Text(text = "Login")
+            }
+            SnackbarHost(snackbarHostState)
+
         }
 
 

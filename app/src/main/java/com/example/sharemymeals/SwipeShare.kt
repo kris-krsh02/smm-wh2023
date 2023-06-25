@@ -12,12 +12,15 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +33,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.sharemymeals.navigation.PageAppBar
 import com.example.sharemymeals.ui.theme.ShareMyMealsTheme
+import kotlinx.coroutines.launch
 
 class SwipeShare : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +54,8 @@ class SwipeShare : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SwipeScreen(modifier: Modifier = Modifier, navController: NavController) {
+    val snackbarHostState = remember { SnackbarHostState() }
+
     PageAppBar(titleText = "Share Swipes", navController = navController)
 
     Column(
@@ -71,34 +77,57 @@ fun SwipeScreen(modifier: Modifier = Modifier, navController: NavController) {
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text("Username")},
-            modifier = Modifier.padding(1.dp))
+            label = { Text("Username") },
+            modifier = Modifier.padding(1.dp)
+        )
 
 
         OutlinedTextField(
             value = numSwipes,
             onValueChange = { numSwipes = it },
-            label = { Text("Number of Swipes")},
-            modifier = Modifier.padding(16.dp))
+            label = { Text("Number of Swipes") },
+            modifier = Modifier.padding(16.dp)
+        )
 
+        val coroutineScope = rememberCoroutineScope()
+        Column(
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        )
+        {
+            Button(
 
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = {
+                    val user = userData.getUserByUsername(username)
+
+                    if (user != null) {
+                        val message = "Transaction successful!"
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message)
+                        }
+                    } else {
+                        val message = "Incorrect username. Please try again. "
+                        coroutineScope.launch {
+                            snackbarHostState.showSnackbar(message)
+                        }
+                    }
+                },
+
+                modifier = Modifier.align(Alignment.CenterHorizontally)
 
             ) {
-            Text(text = "Send")
+                Text(text = "Login")
+            }
+            SnackbarHost(snackbarHostState)
+
         }
-
-
     }
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun SwipePreview() {
-    ShareMyMealsTheme {
-        SwipeScreen(navController = rememberNavController())
+    @Preview(showBackground = true)
+    @Composable
+    fun SwipePreview() {
+        ShareMyMealsTheme {
+            SwipeScreen(navController = rememberNavController())
+        }
     }
-}
