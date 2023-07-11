@@ -1,0 +1,23 @@
+[
+    {
+        "userID": "doe123",
+        "name": "John Doe",
+        "password": "pass123",
+        "swipes": 10,
+        "points": 100
+    },
+    {
+        "userID": "smit456",
+        "name": "Jane Smith",
+        "password": "pass456",
+        "swipes": 5,
+        "points": 50
+    },
+    {
+        "userID": "john789",
+        "name": "Mike Johnson",
+        "password": "pass789",
+        "swipes": 8,
+        "points": 80
+    }
+]
